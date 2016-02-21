@@ -15,14 +15,6 @@
 
     <context:annotation-config/>
 
-    <bean id="userManager" class="by.epamlab.logic.UserManager">
-        <constructor-arg name="userDao" ref="userDao"/>
-    </bean>
-
-    <bean id="taskManager" class="by.epamlab.logic.TaskManager">
-        <constructor-arg name="taskDao" ref="taskDao"/>
-    </bean>
-
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -33,21 +25,11 @@
                      jndi-name="jdbc/userDB"
                      resource-ref="true"
                      expected-type="javax.sql.DataSource"/>
+
     <bean id="jdbcTemplate"
           class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg ref="dataSource"/>
     </bean>
-
-    <bean id="userDao"
-          class="by.epamlab.dao.db.DBUser">
-        <constructor-arg name="jdbcTemplate" ref="jdbcTemplate"/>
-    </bean>
-
-    <bean id="taskDao"
-          class="by.epamlab.dao.db.DBTask">
-        <constructor-arg name="jdbcTemplate" ref="jdbcTemplate"/>
-    </bean>
-
 
 </beans>
 

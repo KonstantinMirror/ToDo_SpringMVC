@@ -5,22 +5,21 @@ import by.epamlab.exceptions.FileSystemException;
 import by.epamlab.interfaces.IUserDAO;
 import by.epamlab.interfaces.IUserManager;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import by.epamlab.resources.Constants;
 
+import javax.inject.Inject;
 import java.io.IOException;
 
-
+@Component
 public class UserManager implements IUserManager {
 
     public static final Logger LOG = Logger.getLogger(UserManager.class);
 
+    @Inject
     private IUserDAO userDao;
-
-    public UserManager(IUserDAO userDao) {
-        this.userDao = userDao;
-    }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

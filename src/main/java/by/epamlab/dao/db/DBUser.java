@@ -9,17 +9,16 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.apache.log4j.Logger;
 import by.epamlab.resources.Constants;
-
+import org.springframework.stereotype.Component;
+import javax.inject.Inject;
 import java.util.concurrent.locks.ReentrantLock;
 
-
+@Component
 public class DBUser implements IUserDAO {
     public static final Logger LOG = Logger.getLogger(DBUser.class);
-    private JdbcTemplate jdbcTemplate;
 
-    public DBUser(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    @Inject
+    private JdbcTemplate jdbcTemplate;
 
     private static final String EMAIL = "email";
     private static final String ROLE = "role";

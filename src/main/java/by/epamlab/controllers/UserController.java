@@ -6,10 +6,11 @@ import by.epamlab.exceptions.ValidationException;
 import by.epamlab.interfaces.IUserManager;
 import by.epamlab.resources.Constants;
 import by.epamlab.validators.UserValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+    @Inject
     private IUserManager userManager;
 
     @RequestMapping(value = "/authorization", method = RequestMethod.POST)

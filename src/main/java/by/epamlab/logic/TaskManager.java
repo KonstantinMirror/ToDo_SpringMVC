@@ -6,26 +6,26 @@ import by.epamlab.exceptions.FileSystemException;
 import by.epamlab.interfaces.ITaskDAO;
 import by.epamlab.interfaces.ITaskManager;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
 import by.epamlab.resources.Constants;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
-
+@Component
 public class TaskManager implements ITaskManager {
 
     public static final Logger LOG = Logger.getLogger(TaskManager.class);
-    ITaskDAO taskDao;
 
-    public TaskManager(ITaskDAO taskDao) {
-        this.taskDao = taskDao;
-    }
+    @Inject
+    ITaskDAO taskDao;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override

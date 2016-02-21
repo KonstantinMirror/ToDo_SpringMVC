@@ -10,11 +10,11 @@ import by.epamlab.logic.Action;
 import by.epamlab.logic.Location;
 import by.epamlab.logic.TaskFile;
 import by.epamlab.resources.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.inject.Inject;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    @Autowired
+    @Inject
     ITaskManager taskManager;
 
     @RequestMapping(value = "/action", method = RequestMethod.POST)

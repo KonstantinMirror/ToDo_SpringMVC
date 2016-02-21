@@ -9,21 +9,20 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import by.epamlab.resources.Constants;
+import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-
+@Component
 public class DBTask implements ITaskDAO {
     public static final Logger LOG = Logger.getLogger(DBUser.class);
 
+    @Inject
     private JdbcTemplate jdbcTemplate;
-
-    public DBTask(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     @Override
     public Task addTask(User user, String description, Constants.Status status,
