@@ -44,7 +44,7 @@ public class UserController {
             UserValidator.validate(login, password, email);
             User user = userManager.createUser(login, password, email);
             session.setAttribute(Constants.USER, user);
-            return "redirect:tasks/today";
+            return "redirect:/tasks/today";
         } catch (DAOException | ValidationException e) {
             request.setAttribute(Constants.ERROR_MESSAGE, e.getMessage());
         }
