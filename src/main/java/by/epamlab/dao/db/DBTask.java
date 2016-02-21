@@ -74,7 +74,7 @@ public class DBTask implements ITaskDAO {
         String DELETE_QUERY = "DELETE FROM tasks " +
                 " WHERE idTask = ? AND idLogin = ?";
         try {
-                jdbcTemplate.update(DELETE_QUERY, idTask, user.getIdUser());
+            jdbcTemplate.update(DELETE_QUERY, idTask, user.getIdUser());
         } catch (DataAccessException e) {
             LOG.error(e);
             throw new DAOException(Constants.ERROR_DB, e);
@@ -86,8 +86,8 @@ public class DBTask implements ITaskDAO {
         String CHANGE_QUERY = "UPDATE tasks  SET statusTask = ?" +
                 " WHERE idTask = ? AND idLogin = ?";
         try {
-                jdbcTemplate.update(CHANGE_QUERY, status.toString(),
-                        idTask, user.getIdUser());
+            jdbcTemplate.update(CHANGE_QUERY, status.toString(),
+                    idTask, user.getIdUser());
         } catch (DataAccessException e) {
             LOG.error(e);
             throw new DAOException(Constants.ERROR_DB, e);

@@ -23,12 +23,12 @@ public class UserManager implements IUserManager {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public User createUser( String login, String password, String email) {
+    public User createUser(String login, String password, String email) {
         try {
             User user = userDao.addUser(login, email, password);
             TaskFile.createFileFolder(user);
             return user;
-        }catch (IOException e) {
+        } catch (IOException e) {
             LOG.error(e);
             throw new FileSystemException(Constants.ERROR_CREATE_FILE_DIRECTORY);
         }
@@ -36,6 +36,6 @@ public class UserManager implements IUserManager {
 
     @Override
     public User getUser(String login, String password) {
-        return userDao.getUser(login,password);
+        return userDao.getUser(login, password);
     }
 }

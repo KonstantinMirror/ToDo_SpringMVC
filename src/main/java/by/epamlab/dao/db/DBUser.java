@@ -10,8 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.apache.log4j.Logger;
 import by.epamlab.resources.Constants;
 import org.springframework.stereotype.Component;
+
 import javax.inject.Inject;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 @Component
 public class DBUser implements IUserDAO {
@@ -19,11 +20,6 @@ public class DBUser implements IUserDAO {
 
     @Inject
     private JdbcTemplate jdbcTemplate;
-
-    private static final String EMAIL = "email";
-    private static final String ROLE = "role";
-    private static final String ID_LOGIN = "idLogin";
-    private final ReentrantLock lock = new ReentrantLock();
 
 
     @Override
@@ -35,12 +31,12 @@ public class DBUser implements IUserDAO {
             return jdbcTemplate.queryForObject(USER_QUERY, new Object[]{login,
                     password}, (resultSet, i) -> {
                 User user = new User();
-                user.setRole(resultSet.getString(ROLE));
-                user.setEmail(resultSet.getString(EMAIL));
-                user.setIdUser(resultSet.getLong(ID_LOGIN));
+                user.setRole(resultSet.getString(Constants.ROLE));
+                user.setEmail(resultSet.getString(Constants.EMAIL));
+                user.setIdUser(resultSet.getLong(Constants.ID_LOGIN));
                 user.setLogin(login);
                 return user;
-        });
+            });
         } catch (EmptyResultDataAccessException e) {
             LOG.info(e);
             throw new DAOException(Constants.NO_SUCH_USER, e);
@@ -54,7 +50,7 @@ public class DBUser implements IUserDAO {
     public User addUser(String login, String email, String password) {
         String ADD_QUERY = "INSERT INTO logins (login, pwd, email) \n" +
                 "VALUES(?,?,?)";
-        lock.lock();
+
         try {
             jdbcTemplate.update(ADD_QUERY, login,
                     password, email);
@@ -66,8 +62,6 @@ public class DBUser implements IUserDAO {
         } catch (DataAccessException e) {
             LOG.error(e);
             throw new DAOException(Constants.ERROR_DB, e);
-        } finally {
-            lock.unlock();
         }
     }
 }
