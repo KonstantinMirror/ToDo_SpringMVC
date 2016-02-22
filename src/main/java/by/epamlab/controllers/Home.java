@@ -11,4 +11,5 @@ public class Home {
     public String index(){
         return "/start.jsp";
     }
+
 }
